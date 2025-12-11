@@ -1,0 +1,16 @@
+server {
+    # Nginx must listen on port 8080, as required by Cloud Run
+    listen 8080; 
+
+    # Define the root of your application (where the index.html is)
+    root /usr/share/nginx/html;
+    
+    # Enable gzip compression for faster loading
+    gzip on;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+
+    # Try to serve a file directly, or fall back to index.html for client-side routing (like in a Vite/React/Vue app)
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
